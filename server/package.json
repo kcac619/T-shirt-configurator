@@ -22,8 +22,6 @@
     "openai": "^4.24.1",
     "replicate": "^0.29.1",
     "sharp": "^0.33.3"
-  },
-  "resolutions": {
-    "sharp": "^0.29.3"
   }
+ 
 }
