@@ -16,7 +16,7 @@ function App() {
           );
         } else {
           console.error(
-            `Error fetching ${url} - Status code: ${response.status}`
+            `Error fetching ${url} - Status code: ${response.status} \n Retrying in 1 minute`
           );
         }
       })
