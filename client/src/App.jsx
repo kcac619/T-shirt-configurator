@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 function App() {
   // Keep-Alive Script for Frontend (Browser)
 
-  function openUrl() {
+  function openUrl(retries = 10) {
     const url = "https://tshirtconfigurator.onrender.com/";
 
     // Use the Fetch API to make an HTTP request
@@ -16,12 +16,24 @@ function App() {
           );
         } else {
           console.error(
-            `Error fetching ${url} - Status code: ${response.status} \n Retrying in 1 minute`
+            `Error fetching ${url} - Status code: ${response.status}`
           );
+          if (retries > 0) {
+            console.log(`Retrying in 1 minute. Retries left: ${retries - 1}`);
+            setTimeout(() => openUrl(retries - 1), 60000); // Retry after 1 minute
+          } else {
+            console.log("No more retries left.");
+          }
         }
       })
       .catch((error) => {
         console.error(`Error fetching ${url}: ${error.message}`);
+        if (retries > 0) {
+          console.log(`Retrying in 1 minute. Retries left: ${retries - 1}`);
+          setTimeout(() => openUrl(retries - 1), 60000); // Retry after 1 minute
+        } else {
+          console.log("No more retries left.");
+        }
       });
   }
   openUrl();
